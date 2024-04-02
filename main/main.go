@@ -49,7 +49,6 @@ func calculateTime(speedMbits int, sizeBytes byteSize) int64 {
 }
 
 func main() {
-
 	app := &cli.App{
 		Name:  "downcalc",
 		Usage: "calculate download time of file size",
