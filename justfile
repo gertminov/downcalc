@@ -1,3 +1,6 @@
+build:
+  go build -o downcalc ./main
+
 crosscompile:
   just ensurebindir
   env GOOS=linux GOARCH=amd64 go build -o bin/downcalc-amd64-linux ./main; 
