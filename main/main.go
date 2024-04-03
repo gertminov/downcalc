@@ -35,6 +35,12 @@ func saveSpeed() bool {
 	return save == "Yes"
 }
 
+func askSize() string {
+	sizeStr, err := prompt.New().Ask("File Size:").Input("100gb")
+	CheckErr(err)
+	return sizeStr
+}
+
 func parseFileSize(humanSize string) byteSize {
 	size, err := units.FromHumanSize(humanSize)
 	CheckErr(err)
@@ -78,12 +84,14 @@ func main() {
 					writeConfig(strconv.Itoa(speed))
 				}
 			}
-			_ = time.March
-
 			fileSize := cCtx.Args().Get(0)
+			waitForKeyPress := false
 			if fileSize == "" {
-				fmt.Println("no file size given to calculate. Please enter file size like so: 300MB, 45GB")
-				return nil
+				fmt.Println("No file size given to calculate. Please enter file size like so: 300mb, 45gb")
+				fileSize = askSize()
+				if fileSize != "" {
+					waitForKeyPress = true
+				}
 			}
 			inputByteSize := parseFileSize(fileSize)
 			durationSeconds := calculateTime(speed, inputByteSize)
@@ -92,8 +100,15 @@ func main() {
 			hours := int(duration.Hours())
 			minutes := int(duration.Minutes()) % 60
 			seconds := int(duration.Seconds()) % 60
+
 			fmt.Printf("Download time with %d MBit/s for %v:  ", speed, fileSize)
 			color.Green("%dh:%dm:%ds\n", hours, minutes, seconds)
+
+			if waitForKeyPress {
+				yellow := color.New(color.FgYellow).SprintFunc()
+				fmt.Printf("Press %s to exit", yellow("ENTER"))
+				fmt.Scanln()
+			}
 
 			return nil
 		},

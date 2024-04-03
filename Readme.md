@@ -1,6 +1,7 @@
 # DownCalc
 
-Downcalc is a little cli tool that allows you to calculate the estimated download time for a file of a given filesize
+Downcalc is a little cli tool that allows you to calculate the estimated download time for a file of a given filesize.
+> Notice file sizes are treated as the n^2 sizes so 1GB == 10243 Bytes
 
 ## Usage
 ```bash
