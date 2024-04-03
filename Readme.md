@@ -13,7 +13,7 @@ downcal 100gb
 downcal config 100 #sets the download speed to 100 MBit/s. not giving a value prompts a speed test
 ```
 
-### Set the download speed ones
+### Set the download speed once
 ```bash
 downcal -s 500 20gb # calculates the time needed to downlaod 20GB with 500 MBit/s
 ```
