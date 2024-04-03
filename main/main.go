@@ -58,12 +58,15 @@ func main() {
 	app := &cli.App{
 		Name:  "downcalc",
 		Usage: "calculate download time of file size",
-		Flags: []cli.Flag{
-			&cli.BoolFlag{
+		Commands: []*cli.Command{
+			{
 				Name:    "config",
 				Aliases: []string{"c"},
 				Usage:   "Cofigure downcalc",
+				Action:  Config,
 			},
+		},
+		Flags: []cli.Flag{
 			&cli.IntFlag{
 				Name:     "speed",
 				Aliases:  []string{"s"},
@@ -72,9 +75,6 @@ func main() {
 			},
 		},
 		Action: func(cCtx *cli.Context) error {
-			if cCtx.Bool("config") {
-				Config(cCtx)
-			}
 
 			speed := cCtx.Int("speed")
 			if speed == 0 {

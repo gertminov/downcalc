@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/cqroot/prompt"
 	"github.com/cqroot/prompt/input"
+	"github.com/fatih/color"
 	"github.com/urfave/cli/v2"
 	"os"
 	"path/filepath"
@@ -40,7 +41,7 @@ func askSpeed() int {
 	return speedInt
 }
 
-func Config(cCtx *cli.Context) {
+func Config(cCtx *cli.Context) error {
 	var speed int
 	var err error
 	if cCtx.Args().Len() > 0 {
@@ -52,6 +53,9 @@ func Config(cCtx *cli.Context) {
 	}
 
 	writeConfig(strconv.Itoa(speed))
+	fmt.Println("You can now use downcal like so")
+	color.Green("downcal 34gb")
+	return nil
 }
 
 func getConfigDir() string {
